@@ -9,7 +9,7 @@ from typing import List
 print("... تحميل نموذج v14 (TabNet) ...")
 model = TabNetClassifier()
 # (استخدم نفس الاسم من كود التدريب الخاص بك)
-model.load_model("tabnet_eurusd_v14_scalper.zip") 
+model.load_model("tabnet_eurusd_v14_scalper") 
 print("... تم تحميل نموذج v14 بنجاح ...")
 
 app = fastapi.FastAPI()
@@ -49,3 +49,4 @@ async def predict(data: FeaturesInput):
 def root():
 
     return {"message": "خادم v14 (TabNet) يعمل بنجاح!"}
+
