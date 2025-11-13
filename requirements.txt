@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+gunicorn
+numpy
+torch
+pytorch-tabnet
