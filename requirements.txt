@@ -4,3 +4,7 @@ gunicorn
 numpy
 torch
 pytorch-tabnet
+pandas
+scikit-learn
+scipy
+tqdm
