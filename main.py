@@ -32,9 +32,9 @@ async def predict(data: FeaturesInput):
         # (ج) طلب التنبؤ (لا حاجة لخطوة المعالجة)
         prediction_tuple = model.predict(features_np_raw)
 
-        # (د) استخراج الإشارة
-        signal_raw = prediction_tuple[0][0]
-        signal = int(signal_raw)
+# (هـ) استخراج الإشارة
+signal_raw = prediction_tuple[0] # (نستخدم فهرس واحد فقط)
+signal = int(signal_raw)
 
         print(f"🟢 [v14 Server] تم استلام الميزات. الإشارة = {signal}")
 
@@ -49,5 +49,6 @@ async def predict(data: FeaturesInput):
 def root():
 
     return {"message": "خادم v14 (TabNet) يعمل بنجاح!"}
+
 
 
