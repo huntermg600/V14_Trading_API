@@ -26,15 +26,14 @@ async def predict(data: FeaturesInput):
         features_list = data.features
 
         # (ب) تحويلها إلى NumPy Array
-        # (هذه هي البيانات التي يتوقعها النموذج مباشرة)
         features_np_raw = np.array([features_list]) # (الشكل [1, 21])
 
         # (ج) طلب التنبؤ (لا حاجة لخطوة المعالجة)
         prediction_tuple = model.predict(features_np_raw)
 
-# (هـ) استخراج الإشارة
-signal_raw = prediction_tuple[0] # (نستخدم فهرس واحد فقط)
-signal = int(signal_raw)
+        # (د) استخراج الإشارة (هذا هو الإصلاح)
+        signal_raw = prediction_tuple[0] # (نستخدم فهرس واحد فقط)
+        signal = int(signal_raw)
 
         print(f"🟢 [v14 Server] تم استلام الميزات. الإشارة = {signal}")
 
@@ -42,13 +41,15 @@ signal = int(signal_raw)
         return {"prediction": signal}
 
     except Exception as e:
-        print(f"🔴 [v14 Server] حدث خطأ: {str(e)}")
-        raise fastapi.HTTPException(status_code=500, detail=str(e))
+        error_message = str(e)
+        print(f"🔴 [v14 Server] حدث خطأ: {error_message}")
+        # إرجاع خطأ مفصل لمساعدتنا في اكتشاف المشاكل
+        raise fastapi.HTTPException(status_code=500, detail=error_message)
 
 @app.get("/")
 def root():
-
     return {"message": "خادم v14 (TabNet) يعمل بنجاح!"}
+
 
 
 
